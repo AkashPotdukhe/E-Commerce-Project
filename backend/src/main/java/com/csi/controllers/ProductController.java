@@ -60,6 +60,17 @@ public class ProductController {
 		Product product=productService.findProductById(id);
 		return Response.success(ProductResponseDTO.fromEntity(product));
 	}
+
+	@GetMapping("/findproductbyname/{pname}")
+	public ResponseEntity<?> findProductByName(@PathVariable String pname){
+    List<ProductResponseDTO> result=new ArrayList<>();
+
+	for(Product product: productService.findProductByName(pname)){
+		result.add(ProductResponseDTO.fromEntity(product));
+	}
+    return Response.success(result);
+
+	}
 	
 	@GetMapping
 	public ResponseEntity<?> findAllProducts(Optional<Integer> sellerid) {
