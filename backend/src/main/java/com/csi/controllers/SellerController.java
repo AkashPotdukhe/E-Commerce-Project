@@ -1,5 +1,6 @@
 package com.csi.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.csi.models.Response;
@@ -58,6 +59,26 @@ public class SellerController {
 			return Response.success(user);
 		else
 			return Response.status(HttpStatus.NOT_FOUND);
+	}
+
+
+	@GetMapping("findSellerByName/{name}")
+	public ResponseEntity<?> findSellerByName(@PathVariable String name){
+		List<Seller> sellers=new ArrayList<>();
+		for(Seller seller:sellerService.findSellerByName(name)){
+			sellers.add(seller);
+		}
+		return Response.success(sellers);
+	}
+
+
+	@GetMapping("/sortSellerByName()")
+	public ResponseEntity<?> sortSellerByName(){
+		List<Seller> sellersname=new ArrayList<>();
+		for(Seller seller:sellerService.sortSellerByName()){
+			sellersname.add(seller);
+		}
+		return Response.success(sellersname);
 	}
 	
 }

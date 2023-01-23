@@ -1,6 +1,7 @@
 package com.csi.services;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,6 +45,16 @@ public class SellerServiceImpl implements SellerService {
 		// TODO Auto-generated method stub
 		Seller seller=dao.getById(id);
 		dao.delete(seller);
+	}
+
+	@Override
+	public List<Seller> findSellerByName(String name) {
+		return dao.findAll().stream().filter(s->s.getName().equals(name)).collect(Collectors.toList());
+	}
+
+	@Override
+	public List<Seller> sortSellerByName() {
+		return dao.findAll().stream().sorted((s1,s2)->s1.getName().compareToIgnoreCase(s2.getName())).collect(Collectors.toList());
 	}
 
 }

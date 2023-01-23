@@ -10,5 +10,9 @@ public interface SellerService {
 	Seller findById(int id);
 	Seller validate(String userid,String pwd);
 	void deleteSeller(int id);
+
+	List<Seller> findSellerByName(String name);
+
+	List<Seller> sortSellerByName();
 	
 }

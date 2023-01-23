@@ -9,4 +9,6 @@ public interface SellerDao extends JpaRepository<Seller, Integer> {
 	
 	Seller findByUserid(String userid);
 
+	Seller findBySellerName(String name);
+
 }
