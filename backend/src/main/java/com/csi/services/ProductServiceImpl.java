@@ -1,6 +1,8 @@
 package com.csi.services;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.csi.daos.ProductDao;
 import com.csi.utils.StorageService;
@@ -73,4 +75,41 @@ public class ProductServiceImpl implements ProductService{
 		System.err.println(prods.getSize());
 		return prods;
 	}
+
+	@Override
+	public List<Product> findProductByName(String pname) {
+		return dao.findByPname(pname);
+	}
+
+	@Override
+	public List<Product> sortProductByPrice() {
+		return dao.findAll().stream().sorted(Comparator.comparingDouble(Product::getPrice).reversed()).collect(Collectors.toList());
+	}
+
+	@Override
+	public List<Product> filterProductByPrice(int price) {
+		return dao.findAll().stream().filter(p->p.getPrice()<=price).collect(Collectors.toList());
+	}
+
+	@Override
+	public List<Product> filterByProductCatagory(String pcat) {
+		return dao.findAll().stream().filter(cat->cat.getPcat().equals(pcat)).collect(Collectors.toList());
+	}
+
+	@Override
+	public List<Product> filterProductBySubCatagory(String subcat) {
+		return dao.findAll().stream().filter(cat->cat.getSubcat().equals(subcat)).collect(Collectors.toList());
+	}
+
+	@Override
+	public List<Product> sortProductByBrands() {
+		return dao.findAll().stream().sorted((b1,b2)->b1.getBrand().compareToIgnoreCase(b2.getBrand())).collect(Collectors.toList());
+	}
+
+	@Override
+	public List<Product> fetchProductWithSecodHighestPrice() {
+		return dao.findAll().stream().sorted(Comparator.comparingDouble(Product::getPrice).reversed()).skip(1).limit(1).collect(Collectors.toList());
+	}
+
+
 }

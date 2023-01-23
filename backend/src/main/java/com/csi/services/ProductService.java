@@ -15,4 +15,19 @@ public interface ProductService {
 	List<Product> categoryProducts(String pcat,String subcat);
 	Product findProductById(int prodid);
 	Page<Product> allProductsPaginated(int page,int pagesize);
+
+	List<Product> findProductByName(String pname);
+
+	List<Product> sortProductByPrice();
+
+
+	List<Product> filterProductByPrice(int price);
+
+	List<Product> filterByProductCatagory(String pcat);
+
+	List<Product> filterProductBySubCatagory(String subcat);
+
+	List<Product> sortProductByBrands();
+
+	List<Product> fetchProductWithSecodHighestPrice();
 }

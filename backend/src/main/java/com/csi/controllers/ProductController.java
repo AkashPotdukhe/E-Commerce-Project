@@ -71,6 +71,77 @@ public class ProductController {
     return Response.success(result);
 
 	}
+
+	@GetMapping("/sortproductbypriceHighesttoLowest")
+	public ResponseEntity<?> sortProductByPriceHighesttoLowest(){
+		List<ProductResponseDTO> sortedPrice=new ArrayList<>();
+
+		for (Product product: productService.sortProductByPrice()){
+			sortedPrice.add(ProductResponseDTO.fromEntity(product));
+		}
+
+		return Response.success(sortedPrice);
+	}
+
+	@GetMapping("/filterproductbypricegivenbyUser/{price}")
+	public ResponseEntity<?> filterProductByPriceGivenByUSer(@PathVariable int price){
+		List<ProductResponseDTO> filtereddPrice=new ArrayList<>();
+
+		for (Product product: productService.filterProductByPrice(price)){
+			filtereddPrice.add(ProductResponseDTO.fromEntity(product));
+		}
+
+		return Response.success(filtereddPrice);
+	}
+
+
+	@GetMapping("/fetchproductbycatagory/{pcat}")
+	public ResponseEntity<?> fetchProductByPriceGivenByUSer(@PathVariable String pcat){
+		List<ProductResponseDTO> filteredProductCatagory=new ArrayList<>();
+
+		for (Product product: productService.filterByProductCatagory(pcat)){
+			filteredProductCatagory.add(ProductResponseDTO.fromEntity(product));
+		}
+
+		return Response.success(filteredProductCatagory);
+	}
+
+	@GetMapping("/fetchProductBySubCatagory/{subcat}")
+	public ResponseEntity<?> fetchProductBySubCatagory(@PathVariable String subcat){
+		List<ProductResponseDTO> filteredProductBySubCatagory=new ArrayList<>();
+
+		for (Product product: productService.filterProductBySubCatagory(subcat)){
+			filteredProductBySubCatagory.add(ProductResponseDTO.fromEntity(product));
+		}
+
+		return Response.success(filteredProductBySubCatagory);
+	}
+
+	@GetMapping("/sortProductByBrands")
+	public ResponseEntity<?> sortProductByBrandName(){
+		List<ProductResponseDTO> sortedProductByBrands=new ArrayList<>();
+
+		for(Product product:productService.sortProductByBrands()){
+			sortedProductByBrands.add(ProductResponseDTO.fromEntity(product));
+		}
+		return Response.success(sortedProductByBrands);
+	}
+
+
+	@GetMapping("/fetchProductWithSecodHighestPrice")
+	public ResponseEntity<?> fetchProductWithSecodHighestPrice(){
+		List<ProductResponseDTO> filteredProductWithSecodHighestPrice=new ArrayList<>();
+
+		for (Product product: productService.fetchProductWithSecodHighestPrice()){
+			filteredProductWithSecodHighestPrice.add(ProductResponseDTO.fromEntity(product));
+		}
+
+		return Response.success(filteredProductWithSecodHighestPrice);
+	}
+
+
+
+
 	
 	@GetMapping
 	public ResponseEntity<?> findAllProducts(Optional<Integer> sellerid) {
