@@ -13,6 +13,9 @@ import com.csi.utils.entities.Seller;
 public class SellerServiceImpl implements SellerService {
 
 	@Autowired private SellerDao dao;
+
+
+
 	@Override
 	public void registerSeller(Seller seller) {
 		// TODO Auto-generated method stub
@@ -48,7 +51,7 @@ public class SellerServiceImpl implements SellerService {
 	}
 
 	@Override
-	public List<Seller> findSellerByName(String name) {
+	public List<Seller> findSellersByName(String name) {
 		return dao.findAll().stream().filter(s->s.getName().equals(name)).collect(Collectors.toList());
 	}
 

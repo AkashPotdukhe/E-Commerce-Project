@@ -1,6 +1,7 @@
 package com.csi.services;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -53,5 +54,16 @@ public class CustomerServiceImpl implements CustomerService {
 		}
 		dao.save(cust);	
 	}
-	
+
+	@Override
+	public List<Customer> findByName(String name) {
+		return dao.findAll().stream().filter(c1->c1.getName().equals(name)).collect(Collectors.toList());
+	}
+
+	@Override
+	public List<Customer> sortByName() {
+		return dao.findAll().stream().sorted((c1,c2)->c1.getName().compareToIgnoreCase(c2.getName())).collect(Collectors.toList());
+	}
+
+
 }

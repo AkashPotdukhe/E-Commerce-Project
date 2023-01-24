@@ -1,5 +1,6 @@
 package com.csi.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.csi.models.Response;
@@ -62,6 +63,28 @@ public class CustomerController {
 	public ResponseEntity<?> updateProfile(@RequestBody Customer cust,@PathVariable("id") int id) {
 		customerService.updateProfile(cust);
 		return Response.status(HttpStatus.OK);
+	}
+
+	@GetMapping("/findCustomerbyname/{name}")
+	public ResponseEntity<?> findCustomerByName(@PathVariable String name){
+		List<Customer> customers=new ArrayList<>();
+
+		for(Customer customer:customerService.findByName(name)){
+			customers.add(customer);
+		}
+
+		return Response.success(customers);
+	}
+
+	@GetMapping("/sortcustomerbyname")
+	public ResponseEntity<?> sortCustomerByName(){
+		List<Customer> customers=new ArrayList<>();
+
+		for(Customer customer:customerService.sortByName()){
+			customers.add(customer);
+		}
+
+		return Response.success(customers);
 	}
 
 }

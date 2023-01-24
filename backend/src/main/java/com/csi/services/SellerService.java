@@ -11,7 +11,7 @@ public interface SellerService {
 	Seller validate(String userid,String pwd);
 	void deleteSeller(int id);
 
-	List<Seller> findSellerByName(String name);
+	List<Seller> findSellersByName(String name);
 
 	List<Seller> sortSellerByName();
 	

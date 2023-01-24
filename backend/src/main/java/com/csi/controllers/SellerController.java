@@ -65,7 +65,7 @@ public class SellerController {
 	@GetMapping("findSellerByName/{name}")
 	public ResponseEntity<?> findSellerByName(@PathVariable String name){
 		List<Seller> sellers=new ArrayList<>();
-		for(Seller seller:sellerService.findSellerByName(name)){
+		for(Seller seller:sellerService.findSellersByName(name)){
 			sellers.add(seller);
 		}
 		return Response.success(sellers);

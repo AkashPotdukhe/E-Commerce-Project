@@ -61,17 +61,17 @@ public class ProductController {
 		return Response.success(ProductResponseDTO.fromEntity(product));
 	}
 
+
 	@GetMapping("/findproductbyname/{pname}")
 	public ResponseEntity<?> findProductByName(@PathVariable String pname){
-    List<ProductResponseDTO> result=new ArrayList<>();
+		List<ProductResponseDTO> result=new ArrayList<>();
 
-	for(Product product: productService.findProductByName(pname)){
-		result.add(ProductResponseDTO.fromEntity(product));
+		for(Product product: productService.findProductByName(pname)){
+			result.add(ProductResponseDTO.fromEntity(product));
+		}
+		return Response.success(result);
+
 	}
-    return Response.success(result);
-
-	}
-
 	@GetMapping("/sortproductbypriceHighesttoLowest")
 	public ResponseEntity<?> sortProductByPriceHighesttoLowest(){
 		List<ProductResponseDTO> sortedPrice=new ArrayList<>();
